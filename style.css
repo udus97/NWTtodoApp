@@ -1,0 +1,63 @@
+body{
+  width: 800px;
+  margin:15px auto;
+}
+
+section:nth-child(1){
+  height:50px;
+  margin-left:5px
+}
+
+section:nth-child(2){
+  margin-left:5px;
+  overflow: auto;
+}
+
+section:nth-child(1) > input, button{
+  display: inline-block;
+  height: inherit;
+  padding:0;
+  margin:0;
+}
+
+section:nth-child(1) > input{
+  width:600px;
+  outline:0;
+  text-indent: 15px
+}
+
+section:nth-child(1) > button{
+  width: 113px;
+  outline:0;
+  height: 54px;
+}
+
+ul{
+  width:680px
+}
+
+li{
+  list-style: none;
+  padding:8px;
+  border:1px solid green;
+  margin-left: -40px;
+  margin-bottom: 10px
+}
+
+label{
+  display: inline-block;
+  padding:9px;
+  width:600px
+}
+
+li > button {
+  display: inline-block;
+  width: 50px;
+  height:30px;
+  outline:0
+}
+
+label.done{
+  text-decoration: line-through;
+  color:rebeccapurple;
+}
