@@ -51,7 +51,56 @@ inputField.addEventListener('keypress', function (e) {
     }
     localStorage.NWTTodoList = s(toDoDatabase);
     //This function recreates the view anytime there is a change in the todo database
-    //recreateDOM(toDoDatabase);
+    recreateDOM(toDoDatabase);
 
   }
 });
+
+
+//This function is run anytime changes are made to the todo database
+function recreateDOM(toDoDatabase) {
+  //Empty the unordered list container
+  toDoItems.innerHTML = '';
+  //A unique id for button elements
+  anId = 1;
+
+  //Loop through the todo database and create HTML elements on the fly from the properties of each todo object
+  toDoDatabase.forEach(function (todo) {
+    var li = newElement('li');
+
+    var input = newElement('input', null, todo.id, 'checkbox', 'checkbox', todo.checked);
+
+    input.onclick = done;
+
+    var label = newElement('label', todo.text, todo.id, null, todo.done);
+
+    var button = newElement('button', 'X', anId, null, 'delete');
+
+    button.onclick = remove;
+
+    //Add the created HTML elements to the unordered list container
+    li.append(input, label, button);
+    toDoItems.append(li);
+    anId += 1;
+
+  });
+
+}
+
+//An helper function for creating HTML elements
+function newElement() {
+  var element = document.createElement(arguments['0']);
+  var elementText = arguments['1'] || '';
+  if (elementText) {
+    element.appendChild(document.createTextNode(elementText))
+  }
+  element.id = arguments['2'] || '';
+  element.type = arguments['3'] || '';
+  element.className = arguments['4'] || '';
+  if (arguments['5']) {
+    element.checked = 'checked'
+  } else {
+    element.checked = '';
+  }
+  return element;
+}
