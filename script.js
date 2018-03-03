@@ -142,3 +142,15 @@ function done(e) {
     recreateDOM(toDoDatabase);
   }
 }
+
+
+//When the X button is clicked on a particular todo, run this function
+function remove(e) {
+  //Position of the todo item in the database
+  let pos = e.target.id;
+  //Remove the todo item from the database
+  toDoDatabase.splice(pos - 1, 1);
+  localStorage.NWTTodoList = s(toDoDatabase);
+  //Recreate the DOM
+  recreateDOM(toDoDatabase);
+}
