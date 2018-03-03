@@ -70,12 +70,14 @@ function recreateDOM(toDoDatabase) {
 
     var input = newElement('input', null, todo.id, 'checkbox', 'checkbox', todo.checked);
 
+    //Add an event listener to the done checkbox
     input.onclick = done;
 
     var label = newElement('label', todo.text, todo.id, null, todo.done);
 
     var button = newElement('button', 'X', anId, null, 'delete');
 
+    //Add an event listener to the delete button
     button.onclick = remove;
 
     //Add the created HTML elements to the unordered list container
@@ -117,4 +119,26 @@ function emptyToDoList() {
   localStorage.NWTTodoList = s([]);
   toDoItems.innerHTML = '';
   toDoDatabase = [];
+}
+
+
+//When a todo is marked as done, run this function
+function done(e) {
+  //The position index of the todo that was marked as done
+  let selectedTodoPos = e.target.id;
+  //If it is checked, change the ff properties of that particular todo object in the todo database, and recreate the DOM
+  if (this.checked) {
+
+    toDoDatabase[selectedTodoPos - 1].done = 'done';
+    toDoDatabase[selectedTodoPos - 1].checked = 'checked';
+    localStorage.NWTTodoList = s(toDoDatabase);
+    recreateDOM(toDoDatabase);
+  } else {
+
+    //If it isnt checked, do opposite.
+    toDoDatabase[selectedTodoPos - 1].done = '';
+    toDoDatabase[selectedTodoPos - 1].checked = '';
+    localStorage.NWTTodoList = s(toDoDatabase);
+    recreateDOM(toDoDatabase);
+  }
 }
