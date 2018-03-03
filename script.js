@@ -104,3 +104,17 @@ function newElement() {
   }
   return element;
 }
+
+
+//Select the Empty Todo List button
+let emptyListButton = q('section#panel > button');
+
+//When the Empty Todo List button is clicked, run this event listener
+emptyListButton.addEventListener('click', emptyToDoList);
+function emptyToDoList() {
+  //Clear the todo unordered list container and delete the todo database
+  localStorage.clear();
+  localStorage.NWTTodoList = s([]);
+  toDoItems.innerHTML = '';
+  toDoDatabase = [];
+}
