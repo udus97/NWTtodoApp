@@ -1,25 +1,25 @@
 //For easy logging to the console during debugging
-let l = console.log;
+var l = console.log;
 //Methods for parsing and converting a JSON object to a string respectively
-let p = JSON.parse;
-let s = JSON.stringify;
+var p = JSON.parse;
+var s = JSON.stringify;
 
 //For easy querying of DOM elements
-let q = function (element) {
+var q = function (element) {
   return document.querySelector(element);
 }
 
 //The unordered list element.
-let toDoItems = q('section#items > ul');
+var toDoItems = q('section#items > ul');
 
 //The array that'd contain our todo items
-let toDoDatabase = [];
+var toDoDatabase = [];
 
 //If we have never used the todo app before, create a new database in the browser local storage; otherwise load the old database
 if (!localStorage.NWTTodoList) {
   localStorage.NWTTodoList = s([]);
 
-}else{
+} else {
   toDoDatabase = p(localStorage.NWTTodoList);
   recreateDOM(toDoDatabase);
 }
@@ -27,14 +27,14 @@ if (!localStorage.NWTTodoList) {
 
 
 //Select the input field where users will type their todo task
-let inputField = q('input[type=text]');
+var inputField = q('input[type=text]');
 
 //Add an event listener to the input field. When the user types a task and presses the enter key, run this event listener
 inputField.addEventListener('keypress', function (e) {
   if (e.key === "Enter" || e.which === 13) {
     // Remove whitespace from what the user enters
 
-    let task = this.value.trim();
+    var task = this.value.trim();
     //if the input is not empty, create a new todo object literal and add it to the todo database
 
     if (task) {
@@ -75,9 +75,9 @@ function recreateDOM(toDoDatabase) {
 
     var label = newElement('label', todo.text, todo.id, null, todo.done);
 
-    var button = newElement('button', 'X', anId, null, 'delete');
+    var button = newElement('button', 'X', anId, null, 'devare');
 
-    //Add an event listener to the delete button
+    //Add an event listener to the devare button
     button.onclick = remove;
 
     //Add the created HTML elements to the unordered list container
@@ -109,12 +109,12 @@ function newElement() {
 
 
 //Select the Empty Todo List button
-let emptyListButton = q('section#panel > button');
+var emptyListButton = q('section#panel > button');
 
 //When the Empty Todo List button is clicked, run this event listener
 emptyListButton.addEventListener('click', emptyToDoList);
 function emptyToDoList() {
-  //Clear the todo unordered list container and delete the todo database
+  //Clear the todo unordered list container and devare the todo database
   localStorage.clear();
   localStorage.NWTTodoList = s([]);
   toDoItems.innerHTML = '';
@@ -125,7 +125,7 @@ function emptyToDoList() {
 //When a todo is marked as done, run this function
 function done(e) {
   //The position index of the todo that was marked as done
-  let selectedTodoPos = e.target.id;
+  var selectedTodoPos = e.target.id;
   //If it is checked, change the ff properties of that particular todo object in the todo database, and recreate the DOM
   if (this.checked) {
 
@@ -147,7 +147,7 @@ function done(e) {
 //When the X button is clicked on a particular todo, run this function
 function remove(e) {
   //Position of the todo item in the database
-  let pos = e.target.id;
+  var pos = e.target.id;
   //Remove the todo item from the database
   toDoDatabase.splice(pos - 1, 1);
   localStorage.NWTTodoList = s(toDoDatabase);
